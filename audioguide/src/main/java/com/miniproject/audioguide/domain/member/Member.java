@@ -1,5 +1,6 @@
 package com.miniproject.audioguide.domain.member;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.miniproject.audioguide.domain.file.File;
 import com.miniproject.audioguide.domain.memberQuest.MemberQuest;
 import lombok.AllArgsConstructor;
@@ -20,13 +21,12 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
     private String loginId;
+    @JsonIgnore
     private String password;
+    @JsonIgnore
+    private String uuid;
     private String name;
-    private int age;
-    private SexStatus sex;
     private String email;
-    private int percentage;
-    private RoleStatus role;
 
     @OneToMany(mappedBy = "member")
     private List<MemberQuest> memberQuests;
@@ -35,11 +35,16 @@ public class Member {
     @JoinColumn(name = "file_id")
     private File profilePic;
 
-    enum RoleStatus {
-        ADMIN, MEMBER
+    public Member(String loginId, String password, String uuid, String name, String email) {
+        this.loginId = loginId;
+        this.password = password;
+        this.uuid = uuid;
+        this.name = name;
+        this.email = email;
     }
 
-    enum SexStatus{
-        MAN, WOMAN
-    }
+//    private SexStatus sex;
+//    private int age;
+//    private int percentage;
+//    private RoleStatus role;
 }
