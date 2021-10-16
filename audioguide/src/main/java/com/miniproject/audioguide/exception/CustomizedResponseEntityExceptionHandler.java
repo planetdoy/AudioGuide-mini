@@ -41,4 +41,10 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 new ErrorResult("USER-EX",LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(errorResult, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(NoSessionException.class)
+    public ResponseEntity<Object> noSessionException(Exception ex, WebRequest request) {
+        ErrorResult errorResult = new ErrorResult("SESSION-EX", LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorResult, HttpStatus.BAD_REQUEST);
+    }
 }
