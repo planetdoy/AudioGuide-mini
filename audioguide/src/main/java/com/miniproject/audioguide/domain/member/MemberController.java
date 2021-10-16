@@ -26,16 +26,20 @@ public class MemberController {
      */
     @PostMapping("/api/members/login")
     public ResponseEntity<Object> login(@RequestBody LoginForm form, HttpServletRequest request) {
-            //아이디 확인
-            Member member = checkLoginId(form);
-            //비밀번호 확인
-            checkPassword(form, member);
-
-            HttpSession session = request.getSession(true);
-            session.setAttribute(SessionConst.Login_Member, member.getLoginId());
-            session.setMaxInactiveInterval(600);
+        //아이디 확인
+        Member member = checkLoginId(form);
+        //비밀번호 확인
+        checkPassword(form, member);
+        //세션 값 할당
+        setSessionToClient(request, member);
 
         return new ResponseEntity<>(member, HttpStatus.OK);
+    }
+
+    private void setSessionToClient(HttpServletRequest request, Member member) {
+        HttpSession session = request.getSession(true);
+        session.setAttribute(SessionConst.Login_Member, member.getLoginId());
+        session.setMaxInactiveInterval(600);
     }
 
     private Member checkLoginId(LoginForm form) {
