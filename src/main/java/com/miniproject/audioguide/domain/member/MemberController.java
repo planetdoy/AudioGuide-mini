@@ -35,7 +35,7 @@ public class MemberController {
         //세션 값 할당
         setSessionToClient(request, member);
 
-        return new ResponseEntity<>(member, HttpStatus.OK);
+        return new ResponseEntity<Object>(member, HttpStatus.OK);
     }
 
     private void setSessionToClient(HttpServletRequest request, Member member) {
@@ -62,10 +62,9 @@ public class MemberController {
 
     /**
      * 로그아웃 api
-     * @return
      */
     @GetMapping("/api/members/logout")
-    public ResponseEntity logout(HttpServletRequest request) {
+    public ResponseEntity<Object> logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null) {
             throw new NoSessionException("Have No Session, Login First");
@@ -73,7 +72,7 @@ public class MemberController {
         String loginId = (String) session.getAttribute(SessionConst.Login_Member);
 
         session.invalidate();
-        return new ResponseEntity(String.format("%s logout",loginId),HttpStatus.OK);
+        return new ResponseEntity<Object>(String.format("%s logout",loginId),HttpStatus.OK);
     }
 
 }
