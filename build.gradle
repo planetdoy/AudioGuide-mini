@@ -24,6 +24,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 //	implementation 'org.springframework.data:spring-data-rest-hal-explorer'
+
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
 	implementation 'mysql:mysql-connector-java'
     implementation 'junit:junit:4.13.1'
     compileOnly 'org.projectlombok:lombok'

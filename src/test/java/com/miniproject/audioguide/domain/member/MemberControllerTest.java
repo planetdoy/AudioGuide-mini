@@ -36,7 +36,7 @@ class MemberControllerTest {
         String loginId = "admin";
         String password = "1234";
 
-        Map content = new HashMap();
+        Map content = new HashMap<>();
         content.put("loginId", loginId);
         content.put("password", password);
 
