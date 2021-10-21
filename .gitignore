@@ -5,6 +5,9 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+#custom git ignore
+application.yml
+
 ### STS ###
 .apt_generated
 .classpath
