@@ -20,7 +20,11 @@ spring:
       ddl-auto: create
 
 --- #배포 환경
-spring.profiles: real
 spring:
+  config:
+    activate:
+      on-profile: "real"
   profiles:
-    include: real-db
+    include:
+      - "real-db"
+
