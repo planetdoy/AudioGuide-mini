@@ -1,2 +1,2 @@
 spring.profiles.group.default: "local"
-spring.profiles.group.real: "real-db"
+spring.profiles.group.real: "real"
