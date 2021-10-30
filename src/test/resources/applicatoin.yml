@@ -1,0 +1,2 @@
+spring.profiles.group.default: "local,aws"
+spring.profiles.group.real: "real-db,aws"
