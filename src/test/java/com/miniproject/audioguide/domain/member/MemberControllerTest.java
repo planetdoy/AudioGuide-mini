@@ -23,20 +23,20 @@ class MemberControllerTest {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-    @Test
-    void login() throws Exception {
-
-        String loginId = "admin";
-        String password = "1234";
-
-        LoginForm loginForm = new LoginForm(loginId, password);
-        String url = "http://localhost:" + port + "/api/members/login";
-
-        ResponseEntity<Object> responseEntity = testRestTemplate.postForEntity(url, loginForm, Object.class);
-
-        Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-
-    }
+//    @Test
+//    void login() throws Exception {
+//
+//        String loginId = "admin";
+//        String password = "1234";
+//
+//        LoginForm loginForm = new LoginForm(loginId, password);
+//        String url = "http://localhost:" + port + "/api/members/login";
+//
+//        ResponseEntity<Object> responseEntity = testRestTemplate.postForEntity(url, loginForm, Object.class);
+//
+//        Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+//
+//    }
 }
 
 
