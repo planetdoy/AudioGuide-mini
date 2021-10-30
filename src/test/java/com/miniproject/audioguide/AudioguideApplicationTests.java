@@ -2,8 +2,10 @@ package com.miniproject.audioguide;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
-@SpringBootTest(properties={"spring.config.location=/home/ec2-user/app/application-real-db.yml"})
+@ActiveProfiles(profiles = {"real"})
+@SpringBootTest
 class AudioguideApplicationTests {
 
 	@Test
