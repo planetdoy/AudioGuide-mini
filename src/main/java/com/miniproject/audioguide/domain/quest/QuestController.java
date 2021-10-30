@@ -1,12 +1,14 @@
 package com.miniproject.audioguide.domain.quest;
 
 import com.miniproject.audioguide.common.S3Uploader;
+import com.miniproject.audioguide.domain.Result;
 import com.miniproject.audioguide.domain.file.File;
 import com.miniproject.audioguide.domain.file.FileService;
 import com.miniproject.audioguide.domain.member.Member;
 import com.miniproject.audioguide.domain.member.MemberService;
 import com.miniproject.audioguide.domain.member.SessionConst;
 import com.miniproject.audioguide.exception.NoSessionException;
+import com.miniproject.audioguide.exception.ValueEmptyException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -48,6 +52,25 @@ public class QuestController {
         QuestResponseDto questResponseDto = new QuestResponseDto(quest);
 
         return new ResponseEntity<>(questResponseDto,HttpStatus.CREATED);
+    }
+
+    @GetMapping("/api/quests")
+    public ResponseEntity<Object> quests() {
+        List<Quest> list = questService.findAll();
+        if (list == null) throw new ValueEmptyException("퀘스트가 없습니다.");
+        List<QuestResponseDto> dtoList = changeEntityToDto(list);
+
+        Result result = new Result(dtoList);
+        return new ResponseEntity<>(result,HttpStatus.OK);
+    }
+
+    private List<QuestResponseDto> changeEntityToDto(List<Quest> list) {
+        List<QuestResponseDto> responseDtoList = new ArrayList<>();
+        for (Quest quest : list) {
+            QuestResponseDto dto = new QuestResponseDto(quest);
+            responseDtoList.add(dto);
+        }
+        return responseDtoList;
     }
 
     private String getLoginIdBySession(HttpServletRequest request) {
