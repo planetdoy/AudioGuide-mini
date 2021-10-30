@@ -30,7 +30,9 @@ public class Quest {
     @OneToOne(fetch = FetchType.LAZY)
     private File audio;
 
+    public Quest(String title, Member author, File imgFile) {
+        this.title = title;
+        this.author = author;
+        this.image = imgFile;
+    }
 }
-
-
-
