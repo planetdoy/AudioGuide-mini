@@ -22,7 +22,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     protected ResponseEntity<ErrorResult> handleExceptionInternal(Exception ex, WebRequest request) {
         log.error("[exceptionHandle] ex", ex);
         ErrorResult errorResult =
-                new ErrorResult("SERVER-EX",LocalDateTime.now(), "내부 오류", request.getDescription(false));
+                new ErrorResult("SERVER-EX", LocalDateTime.now(), "내부 오류", request.getDescription(false));
         return new ResponseEntity<>(errorResult, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -30,7 +30,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     public ResponseEntity<ErrorResult> notMatchException(Exception ex, WebRequest request) {
         log.error("[exceptionHandle] ex", ex);
         ErrorResult errorResult =
-                new ErrorResult("LOGIN-EX",LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
+                new ErrorResult("LOGIN-EX", LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<ErrorResult>(errorResult, HttpStatus.UNAUTHORIZED);
     }
 
@@ -38,7 +38,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     public ResponseEntity<Object> userNotFoundException(Exception ex, WebRequest request) {
         log.error("[exceptionHandle] ex", ex);
         ErrorResult errorResult =
-                new ErrorResult("USER-EX",LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
+                new ErrorResult("USER-EX", LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(errorResult, HttpStatus.NOT_FOUND);
     }
 
@@ -46,5 +46,11 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     public ResponseEntity<Object> noSessionException(Exception ex, WebRequest request) {
         ErrorResult errorResult = new ErrorResult("SESSION-EX", LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(errorResult, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ValueEmptyException.class)
+    public ResponseEntity<Object> valueEmptyException(Exception ex, WebRequest request) {
+        ErrorResult errorResult = new ErrorResult("NoVALUE-EX",LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorResult, HttpStatus.GONE);
     }
 }
