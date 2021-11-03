@@ -5,6 +5,8 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -22,10 +24,10 @@ public class AmazonS3Config {
 
     @PostConstruct
     public void setAmazonS3Client() {
-        BasicAWSCredentials credentials = new BasicAWSCredentials(this.accessKey, this.secretKey);
+        BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
 
         amazonS3Client = (AmazonS3Client) AmazonS3ClientBuilder.standard()
-                .withRegion(this.region)
+                .withRegion(region)
                 .withCredentials(new AWSStaticCredentialsProvider(credentials))
                 .build();
     }
