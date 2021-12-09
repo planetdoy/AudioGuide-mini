@@ -13,3 +13,15 @@ spring:
         format_sql: true
     hibernate:
       ddl-auto: create
+
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      static: ap-northeast-2
+    credentials:
+      accessKey: accesskey
+      secretKey: secretkey
+    s3:
+      bucket: mpt-audio-file-bucket
